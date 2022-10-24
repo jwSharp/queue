@@ -1,6 +1,9 @@
 /* 
  * Developed by R. E. Bryant, 2017
  * Extended to store strings, 2018
+ *
+ * Developed by Jacob Sharp, 2022
+ * Extended for lab purposes, 2022
  */
 
 /*
@@ -12,9 +15,8 @@
 
 #include <stdbool.h>
 
-/************** Data structure declarations ****************/
+/********** Linked List ******************/
 
-/* Linked list element (You shouldn't need to change this) */
 typedef struct ELE {
     /* Pointer to array holding string.
        This array needs to be explicitly allocated and freed */
@@ -24,14 +26,13 @@ typedef struct ELE {
 
 /* Queue structure */
 typedef struct {
-    list_ele_t *head;  /* Linked list of elements */
-    /*
-      You will need to add more fields to this structure
-      to efficiently implement q_size and q_insert_tail
-    */
+    list_ele_t *head; // linked list
+    list_ele_t *tail; // linked list
+
+    int size;
 } queue_t;
 
-/************** Operations on queue ************************/
+/********** Queue ************************/
 
 /*
   Create empty queue.
@@ -47,8 +48,7 @@ void q_free(queue_t *q);
 
 /*
   Attempt to insert element at head of queue.
-  Return true if successful.
-  Return false if q is NULL or could not allocate space.
+  Return true if successful, false if q is NULL or could not allocate space.
   Argument s points to the string to be stored.
   The function must explicitly allocate space and copy the string into it.
  */
@@ -56,8 +56,7 @@ bool q_insert_head(queue_t *q, char *s);
 
 /*
   Attempt to insert element at tail of queue.
-  Return true if successful.
-  Return false if q is NULL or could not allocate space.
+  Return true if successful, false if q is NULL or could not allocate space.
   Argument s points to the string to be stored.
   The function must explicitly allocate space and copy the string into it.
  */
@@ -65,8 +64,7 @@ bool q_insert_tail(queue_t *q, char *s);
 
 /*
   Attempt to remove element from head of queue.
-  Return true if successful.
-  Return false if queue is NULL or empty.
+  Return true if successful, false if queue is NULL or empty.
   If sp is non-NULL and an element is removed, copy the removed string to *sp
   (up to a maximum of bufsize-1 characters, plus a null terminator.)
   The space used by the list element and the string should be freed.
