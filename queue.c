@@ -29,50 +29,79 @@
 */
 queue_t* q_new()
 {
-    queue_t *q =  malloc(sizeof(queue_t));
-    
-    // cannot allocate space
-    if (q == NULL)
+    queue_t *queue =  malloc(sizeof(queue_t));
+    if (queue == NULL) // handle no space
     {
       printf("Space could not be allocated. Queue not created.");
       return NULL;
     }
 
-    q->head = NULL;
-    q->tail = NULL;
-    q->size = 0;
+    queue->head = NULL;
+    queue->tail = NULL;
+    queue->size = 0;
 
-    return q;
+    return queue;
 }
 
 /* 
   Free all storage used by queue
 */
-void q_free(queue_t *q)
+void q_free(queue_t *queue)
 {
     /* How about freeing the list elements and the strings? */
     
     // free queue structure
-    free(q);
+    free(queue);
 }
 
 /*
   Attempt to insert element at head of queue.
   
+  q: points to a queue
   s: points to the string to be stored
   
   Returns:  true if successful
             false if q is NULL or could not allocate space
  */
-bool q_insert_head(queue_t *q, char *s)
+bool q_insert_head(queue_t *queue, char *string)
 {
+    // handle invalid pointers
+    if (queue == NULL)
+    {
+      printf("Queue pointer does not point to an address. Insertion not completed.");
+      return false;
+    }
+    if (string == NULL)
+    {
+      printf("String pointer does not point to an address. Insertion not completed.");
+      return false;
+    }
+
+    // create new element
     list_ele_t *newh;
-    /* What should you do if the q is NULL? */
     newh = malloc(sizeof(list_ele_t));
-    /* Don't forget to allocate space for the string and copy it */
-    /* What if either call to malloc returns NULL? */
-    newh->next = q->head;
-    q->head = newh;
+    if (newh == NULL) // handle no space
+    {
+      printf("Space could not be allocated. Insertion not completed.");
+      return false;
+    }
+    
+    // deep copy string NEEDS WORK
+    int length = 1; // add 1 for null-terminator
+    char* charArray;
+    charArray = malloc(sizeof(char) * length);
+    for (int i = 0; i < length; i++)
+    {
+      *(charArray + i) = *(string + i);
+    }
+
+    // set structure values
+    newh->next = queue->head;
+    queue->head = newh;
+    if (queue->head->next == NULL)
+    {
+      queue->tail = newh;
+    }
 
     return true;
 }
@@ -85,7 +114,7 @@ bool q_insert_head(queue_t *q, char *s)
   Argument s points to the string to be stored.
   The function must explicitly allocate space and copy the string into it.
  */
-bool q_insert_tail(queue_t *q, char *s)
+bool q_insert_tail(queue_t *queue, char *string)
 {
     /* You need to write the complete code for this function */
     /* Remember: It should operate in O(1) time */
@@ -100,10 +129,10 @@ bool q_insert_tail(queue_t *q, char *s)
   (up to a maximum of bufsize-1 characters, plus a null terminator.)
   The space used by the list element and the string should be freed.
 */
-bool q_remove_head(queue_t *q, char *sp, size_t bufsize)
+bool q_remove_head(queue_t *queue, char *string, size_t bufsize)
 {
     /* You need to fix up this code. */
-    q->head = q->head->next;
+    queue->head = queue->head->next;
     return true;
 }
 
@@ -111,7 +140,7 @@ bool q_remove_head(queue_t *q, char *sp, size_t bufsize)
   Return number of elements in queue.
   Return 0 if q is NULL or empty
  */
-int q_size(queue_t *q)
+int q_size(queue_t *queue)
 {
     /* You need to write the code for this function */
     /* Remember: It should operate in O(1) time */
@@ -125,7 +154,7 @@ int q_size(queue_t *q)
   (e.g., by calling q_insert_head, q_insert_tail, or q_remove_head).
   It should rearrange the existing ones.
  */
-void q_reverse(queue_t *q)
+void q_reverse(queue_t *queue)
 {
     /* You need to write the code for this function */
 }
