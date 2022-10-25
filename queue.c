@@ -59,7 +59,7 @@ void q_free(queue_t *queue)
   s: points to the string to be stored
   
   Returns:  true if successful
-            false if q is NULL or could not allocate space
+            false if queue is NULL or could not allocate space
  */
 bool q_insert_head(queue_t *queue, char *string)
 {
@@ -76,15 +76,15 @@ bool q_insert_head(queue_t *queue, char *string)
   }
 
   // create new element
-  list_ele_t *newh;
-  newh = malloc(sizeof(list_ele_t));
-  if (newh == NULL) // handle no space
+  list_ele_t *newHead;
+  newHead = malloc(sizeof(list_ele_t));
+  if (newHead == NULL) // handle no space
   {
     printf("Space could not be allocated. Insertion not completed.");
     return false;
   }
   
-  // deep copy string NEEDS WORK
+  // deep copy string TODO:NEEDS WORK
   int length = 1; // add 1 for null-terminator
   char* charArray;
   charArray = malloc(sizeof(char) * length);
@@ -96,10 +96,10 @@ bool q_insert_head(queue_t *queue, char *string)
   // set structure values
   if (queue->head == NULL)
   {
-    queue->tail = newh;
+    queue->tail = newHead;
   }
-  newh->next = queue->head;
-  queue->head = newh;
+  newHead->next = queue->head;
+  queue->head = newHead;
   queue->size += 1;
 
   return true;
@@ -113,7 +113,7 @@ bool q_insert_head(queue_t *queue, char *string)
   s: points to the string to be stored
 
   Returns:  true if successful
-            false if q is NULL or could not allocate space
+            false if queue is NULL or could not allocate space
  */
 bool q_insert_tail(queue_t *queue, char *string)
 {
@@ -130,15 +130,15 @@ bool q_insert_tail(queue_t *queue, char *string)
   }
 
   // create new element
-  list_ele_t *newh;
-  newh = malloc(sizeof(list_ele_t));
-  if (newh == NULL) // handle no space
+  list_ele_t *newHead;
+  newHead = malloc(sizeof(list_ele_t));
+  if (newHead == NULL) // handle no space
   {
     printf("Space could not be allocated. Insertion not completed.");
     return false;
   }
   
-  // deep copy string NEEDS WORK
+  // deep copy string TODO: NEEDS WORK
   int length = 1; // add 1 for null-terminator
   char* charArray;
   charArray = malloc(sizeof(char) * length);
@@ -148,34 +148,53 @@ bool q_insert_tail(queue_t *queue, char *string)
   }
 
   // set structure values
-  if (queue->head == NULL) // empty queue
-  {
-    queue->head == newh;
-    
-  }
-  else
-  {
-    queue->tail->next = newh;
-  }
-  newh->next = NULL;
-  queue->tail = newh;
+  if (queue->size == 0) { queue->head == newHead; } // empty
+  else { queue->tail->next = newHead; }
+  newHead->next = NULL;
+  queue->tail = newHead;
   queue->size += 1;
 
   return true;
 }
 
 /*
-  Attempt to remove element from head of queue.
-  Return true if successful.
-  Return false if queue is NULL or empty.
-  If sp is non-NULL and an element is removed, copy the removed string to *sp
-  (up to a maximum of bufsize-1 characters, plus a null terminator.)
-  The space used by the list element and the string should be freed.
+  Attempt to remove element from head of queue
+
+  Returns:  true if successful
+            false if queue is NULL or empty
 */
 bool q_remove_head(queue_t *queue, char *string, size_t bufsize)
 {
-  /* You need to fix up this code. */
+  // handle invalid pointers
+  if (queue == NULL)
+  {
+    printf("Queue pointer does not point to an address. Deletion not completed.");
+    return false;
+  }
+  if (string == NULL)
+  {
+    printf("String pointer does not point to an address. Deletion not completed.");
+    return false;
+  }
+
+  // handle empty queue
+  if (queue->size == 0)
+  {
+    printf("Queue is empty.");
+    return false;
+  }
+
+  // free old head
+
+  // change head
   queue->head = queue->head->next;
+
+  /*
+    If sp is non-NULL and an element is removed, copy the removed string to *sp
+    (up to a maximum of bufsize-1 characters, plus a null terminator.)
+    The space used by the list element and the string should be freed.
+  */
+  
   return true;
 }
 
@@ -195,13 +214,15 @@ int q_size(queue_t *queue)
 
 /*
   Reverse elements in queue
+ */
+void q_reverse(queue_t *queue)
+{
+  /* You need to write the code for this function 
+  
   No effect if q is NULL or empty
   This function should not allocate or free any list elements
   (e.g., by calling q_insert_head, q_insert_tail, or q_remove_head).
   It should rearrange the existing ones.
- */
-void q_reverse(queue_t *queue)
-{
-  /* You need to write the code for this function */
+  */
 }
 
