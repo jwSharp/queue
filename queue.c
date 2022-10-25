@@ -27,7 +27,7 @@
 */
 queue_t* q_new()
 {
-  queue_t *queue =  malloc(sizeof(queue_t));
+  queue_t* queue =  malloc(sizeof(queue_t));
   if (queue == NULL) // handle no space
   {
     printf("Space could not be allocated. Queue not created.");
@@ -46,7 +46,9 @@ queue_t* q_new()
 */
 void q_free(queue_t *queue)
 {
-  /* How about freeing the list elements and the strings? */
+  /* TODO
+    freeing the list elements and the strings
+  */
   
   // free queue structure
   free(queue);
@@ -61,7 +63,7 @@ void q_free(queue_t *queue)
   Returns:  true if successful
             false if queue is NULL or could not allocate space
  */
-bool q_insert_head(queue_t *queue, char *string)
+bool q_insert_head(queue_t* queue, char* string)
 {
   // handle invalid pointers
   if (queue == NULL)
@@ -76,7 +78,7 @@ bool q_insert_head(queue_t *queue, char *string)
   }
 
   // create new element
-  list_ele_t *newHead;
+  list_ele_t* newHead;
   newHead = malloc(sizeof(list_ele_t));
   if (newHead == NULL) // handle no space
   {
@@ -84,7 +86,9 @@ bool q_insert_head(queue_t *queue, char *string)
     return false;
   }
   
-  // deep copy string TODO:NEEDS WORK
+  /* TODO
+    deep copy string
+  */
   int length = 1; // add 1 for null-terminator
   char* charArray;
   charArray = malloc(sizeof(char) * length);
@@ -114,8 +118,8 @@ bool q_insert_head(queue_t *queue, char *string)
 
   Returns:  true if successful
             false if queue is NULL or could not allocate space
- */
-bool q_insert_tail(queue_t *queue, char *string)
+*/
+bool q_insert_tail(queue_t* queue, char* string)
 {
   // handle invalid pointers
   if (queue == NULL)
@@ -130,7 +134,7 @@ bool q_insert_tail(queue_t *queue, char *string)
   }
 
   // create new element
-  list_ele_t *newHead;
+  list_ele_t* newHead;
   newHead = malloc(sizeof(list_ele_t));
   if (newHead == NULL) // handle no space
   {
@@ -138,7 +142,9 @@ bool q_insert_tail(queue_t *queue, char *string)
     return false;
   }
   
-  // deep copy string TODO: NEEDS WORK
+  /* TODO
+    deep copy string
+  */
   int length = 1; // add 1 for null-terminator
   char* charArray;
   charArray = malloc(sizeof(char) * length);
@@ -163,7 +169,7 @@ bool q_insert_tail(queue_t *queue, char *string)
   Returns:  true if successful
             false if queue is NULL or empty
 */
-bool q_remove_head(queue_t *queue, char *string, size_t bufsize)
+bool q_remove_head(queue_t* queue, char* string, size_t bufsize)
 {
   // handle invalid pointers
   if (queue == NULL)
@@ -184,16 +190,17 @@ bool q_remove_head(queue_t *queue, char *string, size_t bufsize)
     return false;
   }
 
-  // free old head
+  /* TODO
+    copy the removed string to *sp
+    (up to a maximum of bufsize-1 characters, plus a null terminator)
+    The space used by the list element and the string should be freed.
+  */
+  /* TODO
+    free old head
+  */
 
   // change head
   queue->head = queue->head->next;
-
-  /*
-    If sp is non-NULL and an element is removed, copy the removed string to *sp
-    (up to a maximum of bufsize-1 characters, plus a null terminator.)
-    The space used by the list element and the string should be freed.
-  */
   
   return true;
 }
@@ -202,7 +209,7 @@ bool q_remove_head(queue_t *queue, char *string, size_t bufsize)
   Returns:  number of elements in queue
             0 if q is NULL or empty
  */
-int q_size(queue_t *queue)
+int q_size(queue_t* queue)
 {
   if (queue == NULL)
   {
@@ -215,7 +222,7 @@ int q_size(queue_t *queue)
 /*
   Reverse elements in queue
  */
-void q_reverse(queue_t *queue)
+void q_reverse(queue_t* queue)
 {
   if (queue == NULL or queue->size == 0)
   {
@@ -228,7 +235,6 @@ void q_reverse(queue_t *queue)
   // reverse order
   list_ele_t* prev = queue->head;
   list_ele_t* curr = prev.next;
-
   while (curr->next != NULL)
   {
     // update link
@@ -241,5 +247,9 @@ void q_reverse(queue_t *queue)
 
   // new head
   queue->head = prev;
+
+  /* TODO
+    free pointers?
+  */
 }
 
