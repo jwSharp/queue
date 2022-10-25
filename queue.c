@@ -182,14 +182,17 @@ bool q_remove_head(queue_t *queue, char *string, size_t bufsize)
 }
 
 /*
-  Return number of elements in queue.
-  Return 0 if q is NULL or empty
+  Returns:  number of elements in queue
+            0 if q is NULL or empty
  */
 int q_size(queue_t *queue)
 {
-    /* You need to write the code for this function */
-    /* Remember: It should operate in O(1) time */
+  if (queue == NULL)
+  {
+    printf("Queue pointer does not point to an address. Insertion not completed.");
     return 0;
+  }
+  return queue->size;
 }
 
 /*
