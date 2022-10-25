@@ -7,9 +7,7 @@
 
 /*
  * This program implements a queue supporting both FIFO and LIFO
- * operations.
- *
- * It uses a singly-linked list to represent the set of queue elements
+ * operations using a singly-linked list to represent the set of queue elements
  */
 
 #include <stdlib.h>
@@ -29,18 +27,18 @@
 */
 queue_t* q_new()
 {
-    queue_t *queue =  malloc(sizeof(queue_t));
-    if (queue == NULL) // handle no space
-    {
-      printf("Space could not be allocated. Queue not created.");
-      return NULL;
-    }
+  queue_t *queue =  malloc(sizeof(queue_t));
+  if (queue == NULL) // handle no space
+  {
+    printf("Space could not be allocated. Queue not created.");
+    return NULL;
+  }
 
-    queue->head = NULL;
-    queue->tail = NULL;
-    queue->size = 0;
+  queue->head = NULL;
+  queue->tail = NULL;
+  queue->size = 0;
 
-    return queue;
+  return queue;
 }
 
 /* 
@@ -48,14 +46,14 @@ queue_t* q_new()
 */
 void q_free(queue_t *queue)
 {
-    /* How about freeing the list elements and the strings? */
-    
-    // free queue structure
-    free(queue);
+  /* How about freeing the list elements and the strings? */
+  
+  // free queue structure
+  free(queue);
 }
 
 /*
-  Attempt to insert element at head of queue.
+  Attempt to insert element at head of queue
   
   q: points to a queue
   s: points to the string to be stored
@@ -65,46 +63,46 @@ void q_free(queue_t *queue)
  */
 bool q_insert_head(queue_t *queue, char *string)
 {
-    // handle invalid pointers
-    if (queue == NULL)
-    {
-      printf("Queue pointer does not point to an address. Insertion not completed.");
-      return false;
-    }
-    if (string == NULL)
-    {
-      printf("String pointer does not point to an address. Insertion not completed.");
-      return false;
-    }
+  // handle invalid pointers
+  if (queue == NULL)
+  {
+    printf("Queue pointer does not point to an address. Insertion not completed.");
+    return false;
+  }
+  if (string == NULL)
+  {
+    printf("String pointer does not point to an address. Insertion not completed.");
+    return false;
+  }
 
-    // create new element
-    list_ele_t *newh;
-    newh = malloc(sizeof(list_ele_t));
-    if (newh == NULL) // handle no space
-    {
-      printf("Space could not be allocated. Insertion not completed.");
-      return false;
-    }
-    
-    // deep copy string NEEDS WORK
-    int length = 1; // add 1 for null-terminator
-    char* charArray;
-    charArray = malloc(sizeof(char) * length);
-    for (int i = 0; i < length; i++)
-    {
-      *(charArray + i) = *(string + i);
-    }
+  // create new element
+  list_ele_t *newh;
+  newh = malloc(sizeof(list_ele_t));
+  if (newh == NULL) // handle no space
+  {
+    printf("Space could not be allocated. Insertion not completed.");
+    return false;
+  }
+  
+  // deep copy string NEEDS WORK
+  int length = 1; // add 1 for null-terminator
+  char* charArray;
+  charArray = malloc(sizeof(char) * length);
+  for (int i = 0; i < length; i++)
+  {
+    *(charArray + i) = *(string + i);
+  }
 
-    // set structure values
-    if (queue->head == NULL)
-    {
-      queue->tail = newh;
-    }
-    newh->next = queue->head;
-    queue->head = newh;
-    queue->size += 1;
+  // set structure values
+  if (queue->head == NULL)
+  {
+    queue->tail = newh;
+  }
+  newh->next = queue->head;
+  queue->head = newh;
+  queue->size += 1;
 
-    return true;
+  return true;
 }
 
 
@@ -119,51 +117,51 @@ bool q_insert_head(queue_t *queue, char *string)
  */
 bool q_insert_tail(queue_t *queue, char *string)
 {
-    // handle invalid pointers
-    if (queue == NULL)
-    {
-      printf("Queue pointer does not point to an address. Insertion not completed.");
-      return false;
-    }
-    if (string == NULL)
-    {
-      printf("String pointer does not point to an address. Insertion not completed.");
-      return false;
-    }
+  // handle invalid pointers
+  if (queue == NULL)
+  {
+    printf("Queue pointer does not point to an address. Insertion not completed.");
+    return false;
+  }
+  if (string == NULL)
+  {
+    printf("String pointer does not point to an address. Insertion not completed.");
+    return false;
+  }
 
-    // create new element
-    list_ele_t *newh;
-    newh = malloc(sizeof(list_ele_t));
-    if (newh == NULL) // handle no space
-    {
-      printf("Space could not be allocated. Insertion not completed.");
-      return false;
-    }
+  // create new element
+  list_ele_t *newh;
+  newh = malloc(sizeof(list_ele_t));
+  if (newh == NULL) // handle no space
+  {
+    printf("Space could not be allocated. Insertion not completed.");
+    return false;
+  }
+  
+  // deep copy string NEEDS WORK
+  int length = 1; // add 1 for null-terminator
+  char* charArray;
+  charArray = malloc(sizeof(char) * length);
+  for (int i = 0; i < length; i++)
+  {
+    *(charArray + i) = *(string + i);
+  }
+
+  // set structure values
+  if (queue->head == NULL) // empty queue
+  {
+    queue->head == newh;
     
-    // deep copy string NEEDS WORK
-    int length = 1; // add 1 for null-terminator
-    char* charArray;
-    charArray = malloc(sizeof(char) * length);
-    for (int i = 0; i < length; i++)
-    {
-      *(charArray + i) = *(string + i);
-    }
+  }
+  else
+  {
+    queue->tail->next = newh;
+  }
+  newh->next = NULL;
+  queue->tail = newh;
+  queue->size += 1;
 
-    // set structure values
-    if (queue->head == NULL) // empty queue
-    {
-      queue->head == newh;
-      
-    }
-    else
-    {
-      queue->tail->next = newh;
-    }
-    newh->next = NULL;
-    queue->tail = newh;
-    queue->size += 1;
-
-    return true;
+  return true;
 }
 
 /*
@@ -176,9 +174,9 @@ bool q_insert_tail(queue_t *queue, char *string)
 */
 bool q_remove_head(queue_t *queue, char *string, size_t bufsize)
 {
-    /* You need to fix up this code. */
-    queue->head = queue->head->next;
-    return true;
+  /* You need to fix up this code. */
+  queue->head = queue->head->next;
+  return true;
 }
 
 /*
@@ -204,6 +202,6 @@ int q_size(queue_t *queue)
  */
 void q_reverse(queue_t *queue)
 {
-    /* You need to write the code for this function */
+  /* You need to write the code for this function */
 }
 
