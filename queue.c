@@ -6,8 +6,8 @@
  */
 
 /*
- * This program implements a queue supporting both FIFO and LIFO
- * operations using a singly-linked list to represent the set of queue elements
+ * Implements a queue (both FIFO and LIFO operations)
+ * using a singly-linked list to represent the set of queue elements
  */
 
 #include <stdlib.h>
@@ -217,12 +217,29 @@ int q_size(queue_t *queue)
  */
 void q_reverse(queue_t *queue)
 {
-  /* You need to write the code for this function 
-  
-  No effect if q is NULL or empty
-  This function should not allocate or free any list elements
-  (e.g., by calling q_insert_head, q_insert_tail, or q_remove_head).
-  It should rearrange the existing ones.
-  */
+  if (queue == NULL or queue->size == 0)
+  {
+    return;
+  }
+
+  // new tail
+  list_ele_t* tail = queue->head;
+
+  // reverse order
+  list_ele_t* prev = queue->head;
+  list_ele_t* curr = prev.next;
+
+  while (curr->next != NULL)
+  {
+    // update link
+    curr->next = prev;
+
+    // iterate
+    prev = curr;
+    curr = curr->next;
+  }
+
+  // new head
+  queue->head = prev;
 }
 
