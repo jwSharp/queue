@@ -1,6 +1,8 @@
 /* 
  * Developed by R. E. Bryant, 2017
  * Extended to store strings, 2018
+ * 
+ * Extended by Jacob Sharp, 2022
  */
 
 /*
@@ -12,37 +14,55 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+
 #include <string.h>
 
 #include "harness.h"
 #include "queue.h"
 
+
 /*
-  Create empty queue.
-  Return NULL if could not allocate space.
+  Create empty queue
+
+  Returns:  pointer to a queue
+            NULL if could not allocate space
 */
-queue_t *q_new()
+queue_t* q_new()
 {
     queue_t *q =  malloc(sizeof(queue_t));
-    /* What if malloc returned NULL? */
+    
+    // cannot allocate space
+    if (q == NULL)
+    {
+      printf("Space could not be allocated. Queue not created.");
+      return NULL;
+    }
+
     q->head = NULL;
+    q->tail = NULL;
+    q->size = 0;
+
     return q;
 }
 
-/* Free all storage used by queue */
+/* 
+  Free all storage used by queue
+*/
 void q_free(queue_t *q)
 {
     /* How about freeing the list elements and the strings? */
-    /* Free queue structure */
+    
+    // free queue structure
     free(q);
 }
 
 /*
   Attempt to insert element at head of queue.
-  Return true if successful.
-  Return false if q is NULL or could not allocate space.
-  Argument s points to the string to be stored.
-  The function must explicitly allocate space and copy the string into it.
+  
+  s: points to the string to be stored
+  
+  Returns:  true if successful
+            false if q is NULL or could not allocate space
  */
 bool q_insert_head(queue_t *q, char *s)
 {
@@ -53,6 +73,7 @@ bool q_insert_head(queue_t *q, char *s)
     /* What if either call to malloc returns NULL? */
     newh->next = q->head;
     q->head = newh;
+
     return true;
 }
 
