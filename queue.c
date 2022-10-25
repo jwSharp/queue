@@ -96,29 +96,74 @@ bool q_insert_head(queue_t *queue, char *string)
     }
 
     // set structure values
-    newh->next = queue->head;
-    queue->head = newh;
-    if (queue->head->next == NULL)
+    if (queue->head == NULL)
     {
       queue->tail = newh;
     }
+    newh->next = queue->head;
+    queue->head = newh;
+    queue->size += 1;
 
     return true;
 }
 
 
 /*
-  Attempt to insert element at tail of queue.
-  Return true if successful.
-  Return false if q is NULL or could not allocate space.
-  Argument s points to the string to be stored.
-  The function must explicitly allocate space and copy the string into it.
+  Attempt to insert element at tail of queue
+
+  q: points to a queue
+  s: points to the string to be stored
+
+  Returns:  true if successful
+            false if q is NULL or could not allocate space
  */
 bool q_insert_tail(queue_t *queue, char *string)
 {
-    /* You need to write the complete code for this function */
-    /* Remember: It should operate in O(1) time */
-    return false;
+    // handle invalid pointers
+    if (queue == NULL)
+    {
+      printf("Queue pointer does not point to an address. Insertion not completed.");
+      return false;
+    }
+    if (string == NULL)
+    {
+      printf("String pointer does not point to an address. Insertion not completed.");
+      return false;
+    }
+
+    // create new element
+    list_ele_t *newh;
+    newh = malloc(sizeof(list_ele_t));
+    if (newh == NULL) // handle no space
+    {
+      printf("Space could not be allocated. Insertion not completed.");
+      return false;
+    }
+    
+    // deep copy string NEEDS WORK
+    int length = 1; // add 1 for null-terminator
+    char* charArray;
+    charArray = malloc(sizeof(char) * length);
+    for (int i = 0; i < length; i++)
+    {
+      *(charArray + i) = *(string + i);
+    }
+
+    // set structure values
+    if (queue->head == NULL) // empty queue
+    {
+      queue->head == newh;
+      
+    }
+    else
+    {
+      queue->tail->next = newh;
+    }
+    newh->next = NULL;
+    queue->tail = newh;
+    queue->size += 1;
+
+    return true;
 }
 
 /*
