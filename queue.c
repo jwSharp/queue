@@ -121,6 +121,8 @@ bool q_insert_head(queue_t* queue, char* string)
   if (queue->head == NULL) { queue->tail = newHead; } // empty
   newHead->next = queue->head;
   queue->head = newHead;
+  
+  // update size
   queue->size += 1;
 
   return true;
@@ -176,6 +178,8 @@ bool q_insert_tail(queue_t* queue, char* string)
   else { queue->tail->next = newTail; }
   newTail->next = NULL;
   queue->tail = newTail;
+  
+  // update size
   queue->size += 1;
 
   return true;
@@ -209,7 +213,8 @@ bool q_remove_head(queue_t* queue, char* string, size_t bufsize)
   }
 
   // copy the removed string to *sp (up to a maximum of bufsize-1 characters)
-  strncpy(string, queue->head->value, bufsize - 1); 
+  if (strlen(string) + 1 < bufsize) { strcpy (string, queue->head->value); }
+  else { strncpy(string, queue->head->value, bufsize - 1); }
 
   // change head
   list_ele_t* oldHead = queue->head;
@@ -218,6 +223,9 @@ bool q_remove_head(queue_t* queue, char* string, size_t bufsize)
   // free old head
   free(oldHead->value);
   free(oldHead);
+
+  // update size
+  queue->size -= 1;
   
   return true;
 }
