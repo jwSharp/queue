@@ -97,8 +97,10 @@ bool q_insert_head(queue_t* queue, char* string)
   if (newValue == NULL) // handle no space
   {
     printf("Space could not be allocated. Insertion not completed.");
+    free(newHead);
     return false;
   }
+  newHead->value = newValue;
   strcpy(newHead->value, string);
 
   // set structure value
@@ -149,8 +151,10 @@ bool q_insert_tail(queue_t* queue, char* string)
   if (newValue == NULL) // handle no space
   {
     printf("Space could not be allocated. Insertion not completed.");
+    free(newTail);
     return false;
   }
+  newTail->value = newValue;
   strcpy(newTail->value, string);
 
   // set structure values
