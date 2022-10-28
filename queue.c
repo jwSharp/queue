@@ -98,10 +98,7 @@ bool q_insert_head(queue_t* queue, char* string)
   }
 
   // set structure values
-  if (queue->head == NULL)
-  {
-    queue->tail = newHead;
-  }
+  if (queue->head == NULL) { queue->tail = newHead; } // empty
   newHead->next = queue->head;
   queue->head = newHead;
   queue->size += 1;
@@ -154,7 +151,7 @@ bool q_insert_tail(queue_t* queue, char* string)
   }
 
   // set structure values
-  if (queue->size == 0) { queue->head == newHead; } // empty
+  if (queue->size == 0) { queue->head = newHead; } // empty
   else { queue->tail->next = newHead; }
   newHead->next = NULL;
   queue->tail = newHead;
@@ -224,17 +221,17 @@ int q_size(queue_t* queue)
  */
 void q_reverse(queue_t* queue)
 {
-  if (queue == NULL or queue->size == 0)
+  if (queue == NULL || queue->size == 0)
   {
     return;
   }
 
   // new tail
-  list_ele_t* tail = queue->head;
+  queue->tail = queue->head;
 
   // reverse order
-  list_ele_t* prev = queue->head;
-  list_ele_t* curr = prev.next;
+  list_ele_t* prev = queue->tail;
+  list_ele_t* curr = prev->next;
   while (curr->next != NULL)
   {
     // update link
