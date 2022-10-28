@@ -52,7 +52,21 @@ void q_free(queue_t *queue)
     return;
   }
   
+  // free each node
+  list_ele_t* curr;
+  list_ele_t* next;
+  curr = queue->head;
 
+  while (curr != NULL)
+  {
+    // free node's value
+    free(curr->value);
+
+    // free node structure
+    next = curr->next;
+    free(curr);
+    curr = next;
+  }
   
   
   // free queue structure
