@@ -208,17 +208,16 @@ bool q_remove_head(queue_t* queue, char* string, size_t bufsize)
     return false;
   }
 
-  /* TODO
-    copy the removed string to *sp
-    (up to a maximum of bufsize-1 characters, plus a null terminator)
-    The space used by the list element and the string should be freed.
-  */
-  /* TODO
-    free old head
-  */
+  // copy the removed string to *sp (up to a maximum of bufsize-1 characters)
+  strncpy(string, queue->head->value, bufsize - 1); 
 
   // change head
+  list_ele_t* oldHead = queue->head;
   queue->head = queue->head->next;
+
+  // free old head
+  free(oldHead->value);
+  free(oldHead);
   
   return true;
 }
@@ -244,30 +243,28 @@ void q_reverse(queue_t* queue)
 {
   if (queue == NULL || queue->size == 0)
   {
+    printf("Queue pointer does not point to an address or queue is empty. Reverse not completed.");
     return;
   }
 
   // new tail
   queue->tail = queue->head;
 
-  // reverse order
-  list_ele_t* prev = queue->tail;
-  list_ele_t* curr = prev->next;
-  while (curr->next != NULL)
-  {
-    // update link
-    curr->next = prev;
+  list_ele_t* prev = NULL;
+  list_ele_t* curr = queue->tail; // size != 0
+  list_ele_t* next = curr->next;
+  
+  curr->next = prev; // reverse link
 
-    // iterate
+  while (next != NULL)
+  {
     prev = curr;
-    curr = curr->next;
+    curr = next;
+    next = curr->next;
+
+    curr->next = prev; // reverse link
   }
 
-  // new head
-  queue->head = prev;
-
-  /* TODO
-    free pointers?
-  */
+  queue->head = curr;
 }
 

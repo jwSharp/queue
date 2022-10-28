@@ -1,92 +1,100 @@
-==5489== Memcheck, a memory error detector
-==5489== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==5489== Using Valgrind-3.18.1-42b08ed5bd-20211015 and LibVEX; rerun with -h for copyright info
-==5489== Command: ./qtest
-==5489== 
---5489-- Valgrind options:
---5489--    -v
---5489--    --leak-check=full
---5489--    --show-leak-kinds=all
---5489--    -s
---5489-- Contents of /proc/version:
---5489--   Linux version 5.15.0-52-generic (buildd@bos02-arm64-051) (gcc (Ubuntu 11.2.0-19ubuntu1) 11.2.0, GNU ld (GNU Binutils for Ubuntu) 2.38) #58-Ubuntu SMP Thu Oct 13 08:04:57 UTC 2022
---5489-- 
---5489-- Arch and hwcaps: ARM64, LittleEndian, v8-fhm-dpbcvadp-sha3-rdm-atomics-fp16-vfp16
---5489-- Page sizes: currently 4096, max supported 65536
---5489-- Valgrind library directory: /usr/libexec/valgrind
---5489-- Reading syms from /home/jws/Documents/449/queue/qtest
---5489-- Reading syms from /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
---5489--   Considering /usr/lib/debug/.build-id/9a/9c6aeba5df4178de168e26fe30ddcdab47d374.debug ..
---5489--   .. build-id is valid
---5489-- Reading syms from /usr/libexec/valgrind/memcheck-arm64-linux
---5489--    object doesn't have a symbol table
---5489--    object doesn't have a dynamic symbol table
---5489-- Scheduler: using generic scheduler lock implementation.
---5489-- Reading suppressions file: /usr/libexec/valgrind/default.supp
-==5489== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-5489-by-jws-on-???
-==5489== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-5489-by-jws-on-???
-==5489== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-5489-by-jws-on-???
-==5489== 
-==5489== TO CONTROL THIS PROCESS USING vgdb (which you probably
-==5489== don't want to do, unless you know exactly what you're doing,
-==5489== or are doing some strange experiment):
-==5489==   /usr/bin/vgdb --pid=5489 ...command...
-==5489== 
-==5489== TO DEBUG THIS PROCESS USING GDB: start GDB like this
-==5489==   /path/to/gdb ./qtest
-==5489== and then give GDB the following command
-==5489==   target remote | /usr/bin/vgdb --pid=5489
-==5489== --pid is optional if only one valgrind process is running
-==5489== 
---5489-- REDIR: 0x401ee00 (ld-linux-aarch64.so.1:strlen) redirected to 0x580b918c (???)
---5489-- REDIR: 0x401de00 (ld-linux-aarch64.so.1:strcmp) redirected to 0x580b91e0 (???)
---5489-- REDIR: 0x401dd40 (ld-linux-aarch64.so.1:index) redirected to 0x580b91b4 (???)
---5489-- Reading syms from /usr/libexec/valgrind/vgpreload_core-arm64-linux.so
---5489--    object doesn't have a symbol table
---5489-- Reading syms from /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so
---5489--    object doesn't have a symbol table
---5489-- Reading syms from /usr/lib/aarch64-linux-gnu/libc.so.6
---5489--   Considering /usr/lib/debug/.build-id/f3/7f3aa07c797e333fd106472898d361f71798f5.debug ..
---5489--   .. build-id is valid
-==5489== WARNING: new redirection conflicts with existing -- ignoring it
---5489--     old: 0x0491e340 (memalign            ) R-> (1011.0) 0x0486a540 memalign
---5489--     new: 0x0491e340 (memalign            ) R-> (1017.0) 0x0486a520 aligned_alloc
-==5489== WARNING: new redirection conflicts with existing -- ignoring it
---5489--     old: 0x0491e340 (memalign            ) R-> (1011.0) 0x0486a540 memalign
---5489--     new: 0x0491e340 (memalign            ) R-> (1017.0) 0x0486a500 aligned_alloc
---5489-- REDIR: 0x4921620 (libc.so.6:memchr) redirected to 0x4840710 (_vgnU_ifunc_wrapper)
---5489-- REDIR: 0x4920650 (libc.so.6:strlen) redirected to 0x4840710 (_vgnU_ifunc_wrapper)
---5489-- REDIR: 0x4921990 (libc.so.6:memset) redirected to 0x4840710 (_vgnU_ifunc_wrapper)
---5489-- REDIR: 0x4920a40 (libc.so.6:rindex) redirected to 0x486ac40 (rindex)
---5489-- REDIR: 0x49298c0 (libc.so.6:__GI_strlen) redirected to 0x486b2a0 (__GI_strlen)
---5489-- REDIR: 0x491d640 (libc.so.6:malloc) redirected to 0x4864fe0 (malloc)
---5489-- REDIR: 0x4920000 (libc.so.6:strcmp) redirected to 0x486c2d0 (strcmp)
---5489-- REDIR: 0x4923700 (libc.so.6:strchrnul) redirected to 0x486f914 (strchrnul)
-cmd>--5489-- REDIR: 0x4927b40 (libc.so.6:__GI_memcpy) redirected to 0x486cf00 (__GI_memcpy)
+==5651== Memcheck, a memory error detector
+==5651== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==5651== Using Valgrind-3.18.1-42b08ed5bd-20211015 and LibVEX; rerun with -h for copyright info
+==5651== Command: ./qtest
+==5651== 
+--5651-- Valgrind options:
+--5651--    -v
+--5651--    --leak-check=full
+--5651--    --show-leak-kinds=all
+--5651--    -s
+--5651-- Contents of /proc/version:
+--5651--   Linux version 5.15.0-52-generic (buildd@bos02-arm64-051) (gcc (Ubuntu 11.2.0-19ubuntu1) 11.2.0, GNU ld (GNU Binutils for Ubuntu) 2.38) #58-Ubuntu SMP Thu Oct 13 08:04:57 UTC 2022
+--5651-- 
+--5651-- Arch and hwcaps: ARM64, LittleEndian, v8-fhm-dpbcvadp-sha3-rdm-atomics-fp16-vfp16
+--5651-- Page sizes: currently 4096, max supported 65536
+--5651-- Valgrind library directory: /usr/libexec/valgrind
+--5651-- Reading syms from /home/jws/Documents/449/queue/qtest
+--5651-- Reading syms from /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+--5651--   Considering /usr/lib/debug/.build-id/9a/9c6aeba5df4178de168e26fe30ddcdab47d374.debug ..
+--5651--   .. build-id is valid
+--5651-- Reading syms from /usr/libexec/valgrind/memcheck-arm64-linux
+--5651--    object doesn't have a symbol table
+--5651--    object doesn't have a dynamic symbol table
+--5651-- Scheduler: using generic scheduler lock implementation.
+--5651-- Reading suppressions file: /usr/libexec/valgrind/default.supp
+==5651== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-5651-by-jws-on-???
+==5651== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-5651-by-jws-on-???
+==5651== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-5651-by-jws-on-???
+==5651== 
+==5651== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==5651== don't want to do, unless you know exactly what you're doing,
+==5651== or are doing some strange experiment):
+==5651==   /usr/bin/vgdb --pid=5651 ...command...
+==5651== 
+==5651== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==5651==   /path/to/gdb ./qtest
+==5651== and then give GDB the following command
+==5651==   target remote | /usr/bin/vgdb --pid=5651
+==5651== --pid is optional if only one valgrind process is running
+==5651== 
+--5651-- REDIR: 0x401ee00 (ld-linux-aarch64.so.1:strlen) redirected to 0x580b918c (???)
+--5651-- REDIR: 0x401de00 (ld-linux-aarch64.so.1:strcmp) redirected to 0x580b91e0 (???)
+--5651-- REDIR: 0x401dd40 (ld-linux-aarch64.so.1:index) redirected to 0x580b91b4 (???)
+--5651-- Reading syms from /usr/libexec/valgrind/vgpreload_core-arm64-linux.so
+--5651--    object doesn't have a symbol table
+--5651-- Reading syms from /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so
+--5651--    object doesn't have a symbol table
+--5651-- Reading syms from /usr/lib/aarch64-linux-gnu/libc.so.6
+--5651--   Considering /usr/lib/debug/.build-id/f3/7f3aa07c797e333fd106472898d361f71798f5.debug ..
+--5651--   .. build-id is valid
+==5651== WARNING: new redirection conflicts with existing -- ignoring it
+--5651--     old: 0x0491e340 (memalign            ) R-> (1011.0) 0x0486a540 memalign
+--5651--     new: 0x0491e340 (memalign            ) R-> (1017.0) 0x0486a520 aligned_alloc
+==5651== WARNING: new redirection conflicts with existing -- ignoring it
+--5651--     old: 0x0491e340 (memalign            ) R-> (1011.0) 0x0486a540 memalign
+--5651--     new: 0x0491e340 (memalign            ) R-> (1017.0) 0x0486a500 aligned_alloc
+--5651-- REDIR: 0x4921620 (libc.so.6:memchr) redirected to 0x4840710 (_vgnU_ifunc_wrapper)
+--5651-- REDIR: 0x4920650 (libc.so.6:strlen) redirected to 0x4840710 (_vgnU_ifunc_wrapper)
+--5651-- REDIR: 0x4921990 (libc.so.6:memset) redirected to 0x4840710 (_vgnU_ifunc_wrapper)
+--5651-- REDIR: 0x4920a40 (libc.so.6:rindex) redirected to 0x486ac40 (rindex)
+--5651-- REDIR: 0x49298c0 (libc.so.6:__GI_strlen) redirected to 0x486b2a0 (__GI_strlen)
+--5651-- REDIR: 0x491d640 (libc.so.6:malloc) redirected to 0x4864fe0 (malloc)
+--5651-- REDIR: 0x4920000 (libc.so.6:strcmp) redirected to 0x486c2d0 (strcmp)
+--5651-- REDIR: 0x4923700 (libc.so.6:strchrnul) redirected to 0x486f914 (strchrnul)
+cmd>--5651-- REDIR: 0x4927b40 (libc.so.6:__GI_memcpy) redirected to 0x486cf00 (__GI_memcpy)
 cmd>new
---5489-- REDIR: 0x4929940 (libc.so.6:__strlen_asimd) redirected to 0x486b274 (strlen)
---5489-- REDIR: 0x491e470 (libc.so.6:calloc) redirected to 0x4869e90 (calloc)
---5489-- REDIR: 0x4920180 (libc.so.6:strcpy) redirected to 0x486b3c0 (strcpy)
---5489-- REDIR: 0x491dbd4 (libc.so.6:free) redirected to 0x4867a60 (free)
---5489-- REDIR: 0x4928fc0 (libc.so.6:__GI_memset) redirected to 0x486ee50 (memset)
+--5651-- REDIR: 0x4929940 (libc.so.6:__strlen_asimd) redirected to 0x486b274 (strlen)
+--5651-- REDIR: 0x491e470 (libc.so.6:calloc) redirected to 0x4869e90 (calloc)
+--5651-- REDIR: 0x4920180 (libc.so.6:strcpy) redirected to 0x486b3c0 (strcpy)
+--5651-- REDIR: 0x491dbd4 (libc.so.6:free) redirected to 0x4867a60 (free)
+--5651-- REDIR: 0x4928fc0 (libc.so.6:__GI_memset) redirected to 0x486ee50 (memset)
 q = []
-cmd>cmd>ih one
-q = [one]
-cmd>cmd>ih two
-q = [two one]
-cmd>cmd>ih three
-q = [three two one]
-cmd>cmd>it four
-q = [three two one four]
+cmd>cmd>ih a
+q = [a]
+cmd>cmd>ih b
+q = [b a]
+cmd>cmd>ih c
+q = [c b a]
+cmd>cmd>ih d
+q = [d c b a]
+cmd>cmd>rh
+--5651-- REDIR: 0x49209d0 (libc.so.6:strncpy) redirected to 0x486b580 (strncpy)
+Removed d from queue
+q = [c b a]
+cmd>cmd>reverse
+q = [a b c]
+cmd>cmd>reverse
+q = [c b a]
 cmd>cmd>free
 q = NULL
 cmd>cmd>quit
 Freeing queue
-Attempted to free a NULL pointer==5489== 
-==5489== HEAP SUMMARY:
-==5489==     in use at exit: 0 bytes in 0 blocks
-==5489==   total heap usage: 58 allocs, 58 frees, 13,716 bytes allocated
-==5489== 
-==5489== All heap blocks were freed -- no leaks are possible
-==5489== 
-==5489== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+Attempted to free a NULL pointer==5651== 
+==5651== HEAP SUMMARY:
+==5651==     in use at exit: 0 bytes in 0 blocks
+==5651==   total heap usage: 69 allocs, 69 frees, 16,822 bytes allocated
+==5651== 
+==5651== All heap blocks were freed -- no leaks are possible
+==5651== 
+==5651== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
