@@ -1,0 +1,61 @@
+# Test of insert_head and remove_head
+ERROR: Segmentation fault occurred.  You dereferenced a NULL or invalid pointer
+# Test of insert_head, insert_tail, and remove_head
+ERROR: Segmentation fault occurred.  You dereferenced a NULL or invalid pointer
+# Test of insert_head, insert_tail, reverse, and remove_head
+ERROR: Segmentation fault occurred.  You dereferenced a NULL or invalid pointer
+# Test of insert_head, insert_tail, and size
+ERROR: Segmentation fault occurred.  You dereferenced a NULL or invalid pointer
+# Test of insert_head, insert_tail, remove_head reverse, and size
+ERROR: Segmentation fault occurred.  You dereferenced a NULL or invalid pointer
+# Test of truncated strings
+ERROR: Segmentation fault occurred.  You dereferenced a NULL or invalid pointer
+# Test operations on NULL queue
+Attempt to free NULL
+Queue pointer does not point to an address. Insertion not completed.Queue pointer does not point to an address. Insertion not completed.Queue pointer does not point to an address. Deletion not completed.Queue pointer does not point to an address. Insertion not completed.# Test operations on empty queue
+Queue is empty.# Test remove_head with NULL argument
+ERROR: Segmentation fault occurred.  You dereferenced a NULL or invalid pointer
+# Test of malloc failure on new
+Space could not be allocated. Queue not created.Space could not be allocated. Queue not created.Attempt to free NULL
+# Test of malloc failure on insert_head
+ERROR: Segmentation fault occurred.  You dereferenced a NULL or invalid pointer
+# Test of malloc failure on insert_tail
+ERROR: Segmentation fault occurred.  You dereferenced a NULL or invalid pointer
+# Test performance of insert_tail
+ERROR: Segmentation fault occurred.  You dereferenced a NULL or invalid pointer
+# Test performance of size
+ERROR: Segmentation fault occurred.  You dereferenced a NULL or invalid pointer
+# Test performance of insert_tail, size, and reverse
+ERROR: Segmentation fault occurred.  You dereferenced a NULL or invalid pointer
+---	Trace		Points
++++ TESTING trace trace-01-ops:
+---	trace-01-ops	0/6
++++ TESTING trace trace-02-ops:
+---	trace-02-ops	0/6
++++ TESTING trace trace-03-ops:
+---	trace-03-ops	0/6
++++ TESTING trace trace-04-ops:
+---	trace-04-ops	0/6
++++ TESTING trace trace-05-ops:
+---	trace-05-ops	0/6
++++ TESTING trace trace-06-string:
+---	trace-06-string	0/7
++++ TESTING trace trace-07-robust:
+---	trace-07-robust	0/7
++++ TESTING trace trace-08-robust:
+---	trace-08-robust	7/7
++++ TESTING trace trace-09-robust:
+---	trace-09-robust	0/7
++++ TESTING trace trace-10-malloc:
+---	trace-10-malloc	7/7
++++ TESTING trace trace-11-malloc:
+---	trace-11-malloc	0/7
++++ TESTING trace trace-12-malloc:
+---	trace-12-malloc	0/7
++++ TESTING trace trace-13-perf:
+---	trace-13-perf	0/7
++++ TESTING trace trace-14-perf:
+---	trace-14-perf	0/7
++++ TESTING trace trace-15-perf:
+---	trace-15-perf	0/7
+---	TOTAL		14/100

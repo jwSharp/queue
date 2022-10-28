@@ -46,9 +46,14 @@ queue_t* q_new()
 */
 void q_free(queue_t *queue)
 {
-  /* TODO
-    freeing the list elements and the strings
-  */
+  if (queue == NULL)
+  {
+    printf("Attempted to free a NULL pointer");
+    return;
+  }
+  
+
+  
   
   // free queue structure
   free(queue);
@@ -86,18 +91,17 @@ bool q_insert_head(queue_t* queue, char* string)
     return false;
   }
   
-  /* TODO
-    deep copy string
-  */
-  int length = 1; // add 1 for null-terminator
-  char* charArray;
-  charArray = malloc(sizeof(char) * length);
-  for (int i = 0; i < length; i++)
+  // deep copy string
+  char* newValue;
+  newValue = malloc(strlen(string) + 1);
+  if (newValue == NULL) // handle no space
   {
-    *(charArray + i) = *(string + i);
+    printf("Space could not be allocated. Insertion not completed.");
+    return false;
   }
+  strcpy(newHead->value, string);
 
-  // set structure values
+  // set structure value
   if (queue->head == NULL) { queue->tail = newHead; } // empty
   newHead->next = queue->head;
   queue->head = newHead;
@@ -131,30 +135,29 @@ bool q_insert_tail(queue_t* queue, char* string)
   }
 
   // create new element
-  list_ele_t* newHead;
-  newHead = malloc(sizeof(list_ele_t));
-  if (newHead == NULL) // handle no space
+  list_ele_t* newTail;
+  newTail = malloc(sizeof(list_ele_t));
+  if (newTail == NULL) // handle no space
   {
     printf("Space could not be allocated. Insertion not completed.");
     return false;
   }
-  
-  /* TODO
-    deep copy string
-  */
-  int length = 1; // add 1 for null-terminator
-  char* charArray;
-  charArray = malloc(sizeof(char) * length);
-  for (int i = 0; i < length; i++)
+
+  // deep copy string
+  char* newValue;
+  newValue = malloc(strlen(string) + 1);
+  if (newValue == NULL) // handle no space
   {
-    *(charArray + i) = *(string + i);
+    printf("Space could not be allocated. Insertion not completed.");
+    return false;
   }
+  strcpy(newTail->value, string);
 
   // set structure values
-  if (queue->size == 0) { queue->head = newHead; } // empty
-  else { queue->tail->next = newHead; }
-  newHead->next = NULL;
-  queue->tail = newHead;
+  if (queue->size == 0) { queue->head = newTail; } // empty
+  else { queue->tail->next = newTail; }
+  newTail->next = NULL;
+  queue->tail = newTail;
   queue->size += 1;
 
   return true;
